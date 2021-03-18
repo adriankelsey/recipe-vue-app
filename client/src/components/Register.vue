@@ -43,6 +43,7 @@ export default {
                     password: this.password
                 })
                 console.log(response.data)
+
             } catch(err) {
                 console.log(err)
             }
@@ -53,9 +54,16 @@ export default {
 <style lang="">
     .register{
         margin: 1em;
+        margin-top: 2em;
     }
 
     input{
         margin: 5px;
+        width: 50%;
+    }
+
+    button{
+        margin-top: 1em;
+        
     }
 </style>

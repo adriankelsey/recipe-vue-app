@@ -3,7 +3,7 @@
         <nav>
             <ul>
                 <a href="/">Home</a>
-                <a href="/">Recipes</a>
+                <a href="#/recipes">Recipes</a>
                 <a href="#/register">log in/ signup</a>
             </ul>
         </nav>
@@ -35,6 +35,11 @@ ul{
     width: 100%;
     justify-content: space-between;
     margin: 1em;
+}
+
+a{
+    color: black;
+    text-decoration: none;
 }
     
 </style>
