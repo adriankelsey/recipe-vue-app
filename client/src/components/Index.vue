@@ -1,6 +1,5 @@
 <template>
   <div class="index">
-    <Nav/>
     <h1>{{this.msg}}</h1>
   </div>
 </template>
@@ -23,5 +22,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+div{
+  color: #41c061;
 
+  width: 80vh;
+}
 </style>

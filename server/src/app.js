@@ -24,16 +24,6 @@ app.post('/register', (req, res) => {
     res.send(`thank you for registring ${req.body.email}`)
 })
 
-let randomRecipe
-
-fetch (api())
-    .then(response => {
-        response.json().then(data => {
-            return data = randomRecipe
-        })
-    })
-console.log(randomRecipe)
-
 app.get('/recipes', (req, res) => {
     fetch (api())
     .then(response => {

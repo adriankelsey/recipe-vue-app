@@ -1,6 +1,5 @@
 <template lang="">
     <div>
-        <Nav/>
         <div class="register">
             <h1> Register </h1>
             <input 
@@ -59,7 +58,8 @@ export default {
 
     input{
         margin: 5px;
-        width: 50%;
+        width: 100%;
+        height: 25px;
     }
 
     button{
