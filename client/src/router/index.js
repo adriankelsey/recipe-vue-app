@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Index from "@/components/Index";
 import Register from "@/components/Register";
 import RandomRecipes from "@/components/RandomRecipes";
+import Recipes from "@/components/Recipes";
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ export default new Router({
       path: "/randomrecipes",
       name: "randomrecipes",
       component: RandomRecipes
+    },
+    {
+      path: "/recipes",
+      name: "recipes",
+      component: Recipes
     }
   ]
 });
