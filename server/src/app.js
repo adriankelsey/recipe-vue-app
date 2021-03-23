@@ -24,8 +24,17 @@ app.post('/register', (req, res) => {
     res.send(`thank you for registring ${req.body.email}`)
 })
 
+app.get('/randomrecipes', (req, res) => {
+    fetch (api.apiRandom)
+    .then(response => {
+        response.json().then(data => {
+            res.send(data)
+        })
+    })
+})
+
 app.get('/recipes', (req, res) => {
-    fetch (api())
+    fetch (api.apiBulk)
     .then(response => {
         response.json().then(data => {
             res.send(data)

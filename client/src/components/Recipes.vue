@@ -5,7 +5,7 @@
             <img class="search-icon" src="https://img.icons8.com/pastel-glyph/20/000000/search--v2.png"/>
         </div>
         <div class="recipes-container">
-            <h1>test</h1>
+            <h4 v-html="recipes"></h4>
         </div>
     </div>
 </template>
@@ -18,15 +18,37 @@ import Api from '@/services/Api'
 export default {
     data(){
         return{
-           
+           recipes: []
         }
     },
     components:{
         
     },
     methods:{
-       
-    }
+       async bulkRecipes(){
+           const response = await Api().get('recipes')
+           let div = '<div>'
+           let recipeTitleArray = []
+           
+           for (let i = 0; i < response.data.length; i++) {
+               let recipeTitle = response.data[i].title
+              recipeTitleArray.push(recipeTitle)
+               
+           }
+           recipeTitleArray.forEach(function(i){
+               div += '<li>' + i + '</li>'
+           })
+
+           div += '</div>'
+           console.log(div)
+           this.recipes = div
+          
+
+       }
+    },
+    mounted() {
+        this.bulkRecipes()
+    },
 }
 </script>
 <style lang="">

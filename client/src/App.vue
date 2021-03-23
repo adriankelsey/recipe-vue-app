@@ -1,6 +1,6 @@
-<template>
-  <div id="app">\
-    <Nav/>
+<template class="template">
+  <div id="app">
+     <Nav/>
     <router-view/>
   </div>
 </template>
@@ -18,14 +18,10 @@ export default {
 
 <style>
 #app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 </style>
