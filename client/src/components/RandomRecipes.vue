@@ -3,19 +3,26 @@
         <div class="grid-ingredients">
             <button @click="getRandomRecipe">Generate</button>
             <h4 class="recipeIngredients">Ingredients</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus consectetur velit, suscipit scelerisque tortor feugiat id. Integer aliquam et odio et lacinia. Nam eget metus et sapien accumsan elementum. Integer vehicula elit sagittis, luctus justo et, volutpat neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non turpis at tellus faucibus commodo. In sed egestas urna. Mauris sed arcu risus. Nulla nec rutrum turpis. Aliquam vitae consequat ligula. Mauris sagittis vestibulum lorem, nec eleifend felis luctus condimentum.
-
-            Duis vel sem non tortor rhoncus fringilla a et velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam maximus arcu non ante mollis, vitae semper enim auctor. Sed in enim tortor. Praesent id dictum lacus, sed imperdiet velit. Aliquam erat volutpat. Vivamus commodo mauris sit amet nulla pellentesque ultrices a in turpis. Vivamus ex mauris, viverra ac mauris et, ultrices tristique justo. Aenean nunc ligula, consectetur vitae aliquam quis, hendrerit pharetra velit. Nulla gravida, dui sed sagittis elementum, augue ipsum tempor sem, vitae semper dui odio lobortis leo.</p>
+            <!--  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus consectetur velit, suscipit scelerisque tortor feugiat id. Integer aliquam et odio et lacinia. Nam eget metus et sapien accumsan elementum. Integer vehicula elit sagittis, luctus justo et, volutpat neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non turpis at tellus faucibus commodo. In sed egestas urna. Mauris sed arcu risus. Nulla nec rutrum turpis. Aliquam vitae consequat ligula. Mauris sagittis vestibulum lorem, nec eleifend felis luctus condimentum.
+            Duis vel sem non tortor rhoncus fringilla a et velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam maximus arcu non ante mollis, vitae semper enim auctor. Sed in enim tortor. Praesent id dictum lacus, sed imperdiet velit. Aliquam erat volutpat. Vivamus commodo mauris sit amet nulla pellentesque ultrices a in turpis. Vivamus ex mauris, viverra ac mauris et, ultrices tristique justo. Aenean nunc ligula, consectetur vitae aliquam quis, hendrerit pharetra velit. Nulla gravida, dui sed sagittis elementum, augue ipsum tempor sem, vitae semper dui odio lobortis leo.</p> -->
             <div class="recipeIngredients" v-html="recipeIngridients"></div>
         </div>
         <div class="grid-recipe">
-            <img v-model="recipeImg" v-bind:src='recipeImg' class="recipe-img"></img>
-            <h3 v-model="recipeTitle">{{this.recipeTitle}}</h3>
-            <h4>instructions</h4>
-             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus consectetur velit, suscipit scelerisque tortor feugiat id. Integer aliquam et odio et lacinia. Nam eget metus et sapien accumsan elementum. Integer vehicula elit sagittis, luctus justo et, volutpat neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non turpis at tellus faucibus commodo. In sed egestas urna. Mauris sed arcu risus. Nulla nec rutrum turpis. Aliquam vitae consequat ligula. Mauris sagittis vestibulum lorem, nec eleifend felis luctus condimentum.
-
-            Duis vel sem non tortor rhoncus fringilla a et velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam maximus arcu non ante mollis, vitae semper enim auctor. Sed in enim tortor. Praesent id dictum lacus, sed imperdiet velit. Aliquam erat volutpat. Vivamus commodo mauris sit amet nulla pellentesque ultrices a in turpis. Vivamus ex mauris, viverra ac mauris et, ultrices tristique justo. Aenean nunc ligula, consectetur vitae aliquam quis, hendrerit pharetra velit. Nulla gravida, dui sed sagittis elementum, augue ipsum tempor sem, vitae semper dui odio lobortis leo.</p>
-            <div class="recipeInstructions" v-html="recipeInstructions"></div>
+            <div class="recipe-main">
+                <div class="recipe-main-img">
+                    <img v-model="recipeImg" v-bind:src='recipeImg' class="recipe-img"></img>
+                </div>
+                <div class="recipe-main-info">
+                    <h3>{{this.recipeTitle}}</h3>
+                    <h4>Health Score: {{this.recipeHealthScore}}</h4>
+                    <h4>{{this.recipeDishType}}</h4>
+                    <h4>Servings: {{this.recipeServings}}</h4>
+                </div>
+            </div>
+            <div class="recipe-instructions-main">
+                <h2 class="recipe-instructions-title">instructions</h2>
+                <div class="recipe-instructions" v-html="recipeInstructions"></div>
+            </div>
         </div>
 
     </div>
@@ -33,6 +40,9 @@ export default {
             recipeImg: '',
             recipeInstructions: '',
             recipeIngridients: '',
+            recipeHealthScore: '',
+            recipeDishType: '',
+            recipeServings: ''
         }
     },
     components:{
@@ -47,6 +57,9 @@ export default {
                 this.recipeTitle = response.data.recipes[0].title
                 this.recipeImg = response.data.recipes[0].image
                 this.recipeInstructions = response.data.recipes[0].instructions
+                this.recipeHealthScore = response.data.recipes[0].healthScore
+                this.recipeDishType = response.data.recipes[0].dishTypes[0]
+                this.recipeServings = response.data.recipes[0].servings
 
                 for (let ingredients = 0; ingredients < response.data.recipes[0].extendedIngredients.length; ingredients++) {
                     let element = response.data.recipes[0].extendedIngredients[ingredients].name;
@@ -55,7 +68,7 @@ export default {
 
                
                 ingredientsArray.forEach(function(i){
-                    str += '<li>' + i + '</li>'
+                    ul += '<li>' + i + '</li>'
                 })
                 ul += '</ul>';
 
@@ -83,18 +96,50 @@ export default {
         height: 100vh;
     }
     .grid-recipe{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 2em;
+        display: flexbox;
 
     }
+    .grid-recipe h3{
+        margin: 1em;
+    }
+
+    .recipe-main{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        justify-content: center;
+        align-items: center;
+        padding: 1em;
+        background-color: rgba(206, 206, 206, 0.39);
+    }
+
+    .recipe-main-img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .recipe-img{
+        width: 100%;
+        border: solid;
+        border-width: 1px;
+        border-color: rgb(41, 40, 40);
+    }
+
+    .recipe-main-info{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
     .grid-ingredients{
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-left: 1em;
-        padding-right: 0.5em;
+        padding-left: 2em;
+        padding-right: 2em;
         background-color: rgba(206, 206, 206, 0.568);
     }
     .grid-ingredients h4{
@@ -104,8 +149,19 @@ export default {
         width: 85%;
     }
     .grid-recipe h4{
-        border-bottom: solid;
         margin-bottom: 1em;
+    }
+
+    .recipe-instructions-main{
+        margin: 2em;
+    }
+
+    .recipe-instructions{
+        margin-left: 1em;
+    }
+
+    .recipe-instructions-title{
+        margin: 1em;
     }
 
     button{
@@ -123,11 +179,6 @@ export default {
 
     }
 
-    .recipe-img{
-        border-width: 1px;
-        width: 60%;
-    }
-
     .recipeInstructions{
         width: 100%;
         text-align: start;
@@ -138,9 +189,9 @@ export default {
         display: flex;
         flex-direction: column;
         width: 100%;
+        margin-left: 1em;
         margin-bottom: 1em;
         text-align: start;
-        border-bottom: solid;
     }
     .ingredientUL{
         display: flex;
